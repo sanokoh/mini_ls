@@ -1,35 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_mini_ls.h                                       :+:      :+:    :+:   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ksano <ksano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/03 16:09:22 by ksano             #+#    #+#             */
-/*   Updated: 2020/12/03 22:36:53 by ksano            ###   ########.fr       */
+/*   Created: 2020/10/18 15:59:08 by ksano             #+#    #+#             */
+/*   Updated: 2020/10/28 10:03:56 by ksano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_MINI_LS_H
-# define FT_MINI_LS_H
+#include "libft.h"
 
-# include <stdio.h>
-# include <dirent.h>
-# include <unistd.h>
-# include <sys/stat.h>
-# include <errno.h>
-# include <string.h>
-
-# define PATH "./"
-
-typedef struct		s_lslist
+t_list		*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	char 			*name;
-	int				stat_time;
-	struct s_lslist	*next;
-} 					t_lslist;
+	t_list	*newlst;
+	t_list	*newelem;
 
-void safe_free(char **p);
-void free_list(t_lslist *head);
-
-#endif
+	if (!lst || !f)
+		return (NULL);
+	newlst = NULL;
+	while (lst)
+	{
+		if (!(newelem = ft_lstnew((f(lst->content)))))
+		{
+			ft_lstclear(&newlst, del);
+			return (NULL);
+		}
+		ft_lstadd_back(&newlst, newelem);
+		lst = lst->next;
+	}
+	return (newlst);
+}

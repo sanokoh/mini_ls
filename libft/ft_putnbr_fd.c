@@ -1,35 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_mini_ls.h                                       :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ksano <ksano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/03 16:09:22 by ksano             #+#    #+#             */
-/*   Updated: 2020/12/03 22:36:53 by ksano            ###   ########.fr       */
+/*   Created: 2020/10/17 11:54:33 by ksano             #+#    #+#             */
+/*   Updated: 2020/10/17 19:28:34 by ksano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_MINI_LS_H
-# define FT_MINI_LS_H
+#include "libft.h"
 
-# include <stdio.h>
-# include <dirent.h>
-# include <unistd.h>
-# include <sys/stat.h>
-# include <errno.h>
-# include <string.h>
-
-# define PATH "./"
-
-typedef struct		s_lslist
+static void			ft_putnbr_each_fd(long n, int fd)
 {
-	char 			*name;
-	int				stat_time;
-	struct s_lslist	*next;
-} 					t_lslist;
+	if (n / 10 == 0)
+	{
+		ft_putchar_fd('0' + n, fd);
+		return ;
+	}
+	ft_putnbr_each_fd(n / 10, fd);
+	ft_putchar_fd('0' + n % 10, fd);
+}
 
-void safe_free(char **p);
-void free_list(t_lslist *head);
-
-#endif
+void				ft_putnbr_fd(int n, int fd)
+{
+	if (n < 0)
+	{
+		ft_putchar_fd('-', fd);
+		ft_putnbr_each_fd((-1) * (long)n, fd);
+	}
+	else
+		ft_putnbr_each_fd(n, fd);
+}

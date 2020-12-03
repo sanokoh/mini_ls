@@ -1,35 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_mini_ls.h                                       :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ksano <ksano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/03 16:09:22 by ksano             #+#    #+#             */
-/*   Updated: 2020/12/03 22:36:53 by ksano            ###   ########.fr       */
+/*   Created: 2020/10/06 21:10:44 by ksano             #+#    #+#             */
+/*   Updated: 2020/10/21 09:56:53 by ksano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_MINI_LS_H
-# define FT_MINI_LS_H
+#include "libft.h"
 
-# include <stdio.h>
-# include <dirent.h>
-# include <unistd.h>
-# include <sys/stat.h>
-# include <errno.h>
-# include <string.h>
-
-# define PATH "./"
-
-typedef struct		s_lslist
+void				*ft_memmove(void *dst, void *src, size_t len)
 {
-	char 			*name;
-	int				stat_time;
-	struct s_lslist	*next;
-} 					t_lslist;
+	unsigned char	*d_cpy;
+	unsigned char	*s_cpy;
 
-void safe_free(char **p);
-void free_list(t_lslist *head);
-
-#endif
+	if (!dst && !src)
+		return (NULL);
+	d_cpy = (unsigned char *)dst;
+	s_cpy = (unsigned char *)src;
+	if (s_cpy > d_cpy)
+	{
+		while (len--)
+			*d_cpy++ = *s_cpy++;
+	}
+	else
+	{
+		d_cpy = d_cpy + len;
+		s_cpy = s_cpy + len;
+		while (len--)
+			*(--d_cpy) = *(--s_cpy);
+	}
+	return (dst);
+}

@@ -1,35 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_mini_ls.h                                       :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ksano <ksano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/03 16:09:22 by ksano             #+#    #+#             */
-/*   Updated: 2020/12/03 22:36:53 by ksano            ###   ########.fr       */
+/*   Created: 2020/10/09 20:20:17 by ksano             #+#    #+#             */
+/*   Updated: 2020/10/28 09:28:17 by ksano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_MINI_LS_H
-# define FT_MINI_LS_H
+#include "libft.h"
 
-# include <stdio.h>
-# include <dirent.h>
-# include <unistd.h>
-# include <sys/stat.h>
-# include <errno.h>
-# include <string.h>
-
-# define PATH "./"
-
-typedef struct		s_lslist
+char	*ft_strchr(const char *s, int c)
 {
-	char 			*name;
-	int				stat_time;
-	struct s_lslist	*next;
-} 					t_lslist;
+	int	i;
 
-void safe_free(char **p);
-void free_list(t_lslist *head);
-
-#endif
+	i = 0;
+	while (s[i])
+	{
+		if (s[i] == c)
+		{
+			return ((char *)&s[i]);
+		}
+		i++;
+	}
+	if (c == '\0')
+		return ((char *)&s[i]);
+	return (NULL);
+}

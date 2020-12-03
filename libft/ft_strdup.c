@@ -1,35 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_mini_ls.h                                       :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ksano <ksano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/03 16:09:22 by ksano             #+#    #+#             */
-/*   Updated: 2020/12/03 22:36:53 by ksano            ###   ########.fr       */
+/*   Created: 2020/10/11 13:52:11 by ksano             #+#    #+#             */
+/*   Updated: 2020/10/26 10:01:42 by ksano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_MINI_LS_H
-# define FT_MINI_LS_H
+#include "libft.h"
 
-# include <stdio.h>
-# include <dirent.h>
-# include <unistd.h>
-# include <sys/stat.h>
-# include <errno.h>
-# include <string.h>
-
-# define PATH "./"
-
-typedef struct		s_lslist
+char		*ft_strdup(char *s1)
 {
-	char 			*name;
-	int				stat_time;
-	struct s_lslist	*next;
-} 					t_lslist;
+	int		len;
+	char	*dest;
 
-void safe_free(char **p);
-void free_list(t_lslist *head);
-
-#endif
+	len = ft_strlen(s1);
+	dest = (char *)malloc(sizeof(char) * (len + 1));
+	if (!dest)
+		return (NULL);
+	ft_strlcpy(dest, s1, len + 1);
+	return (dest);
+}

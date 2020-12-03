@@ -1,35 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_mini_ls.h                                       :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ksano <ksano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/03 16:09:22 by ksano             #+#    #+#             */
-/*   Updated: 2020/12/03 22:36:53 by ksano            ###   ########.fr       */
+/*   Created: 2020/10/05 21:00:17 by ksano             #+#    #+#             */
+/*   Updated: 2020/10/25 17:20:20 by ksano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_MINI_LS_H
-# define FT_MINI_LS_H
+#include "libft.h"
 
-# include <stdio.h>
-# include <dirent.h>
-# include <unistd.h>
-# include <sys/stat.h>
-# include <errno.h>
-# include <string.h>
-
-# define PATH "./"
-
-typedef struct		s_lslist
+void				*ft_memcpy(void *dst, const void *src, size_t n)
 {
-	char 			*name;
-	int				stat_time;
-	struct s_lslist	*next;
-} 					t_lslist;
+	size_t			i;
+	unsigned char	*d_temp;
+	unsigned char	*s_temp;
 
-void safe_free(char **p);
-void free_list(t_lslist *head);
-
-#endif
+	if (dst == src)
+		return (dst);
+	d_temp = (unsigned char *)dst;
+	s_temp = (unsigned char *)src;
+	i = 0;
+	while (i < n)
+	{
+		d_temp[i] = s_temp[i];
+		i++;
+	}
+	return (dst);
+}
