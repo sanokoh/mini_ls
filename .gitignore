@@ -1,2 +1,5 @@
 writetest.c
 a.out
+test_p.c
+ft_mini_ls
+libft/

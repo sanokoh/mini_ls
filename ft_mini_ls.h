@@ -6,7 +6,7 @@
 /*   By: ksano <ksano@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/03 16:09:22 by ksano             #+#    #+#             */
-/*   Updated: 2020/12/03 22:36:53 by ksano            ###   ########.fr       */
+/*   Updated: 2020/12/04 15:28:05 by ksano            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,9 @@ typedef struct		s_lslist
 	struct s_lslist	*next;
 } 					t_lslist;
 
-void safe_free(char **p);
-void free_list(t_lslist *head);
+void 				free_list(t_lslist *head);
+void				print_list(t_lslist *list);
+t_lslist			*new_list(t_lslist *head, struct dirent *dp, struct stat *stat_buf);
+t_lslist			*add_list(t_lslist *head, t_lslist *new);
 
 #endif
